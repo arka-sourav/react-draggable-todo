@@ -25,7 +25,7 @@ const App = () => {
   useEffect(() => {
     const mappedArr = data.map((item, i) => {
       const id = getRandomId();
-      return { id, x: 0, y: 0, title: item };
+      return { id, x: 0, y: 0, title: item, isDone: false };
     });
     setPositions(mappedArr);
   }, []);
@@ -75,12 +75,23 @@ const App = () => {
       const id = getRandomId();
       setPositions((prevArr) => [
         ...prevArr,
-        { id, x: 0, y: 0, title: inputText },
+        { id, x: 0, y: 0, title: inputText, isDone: false },
       ]);
       setInputText("");
     }
 
     setIsAddNotePage(!isAddNotePage);
+  };
+
+  const changeIsDone = (value, id) => {
+    setPositions((prevArr) =>
+      prevArr.map((item) => {
+        if (item.id === id) {
+          return { id, x: 0, y: 0, title: item.title, isDone: value };
+        }
+        return item;
+      })
+    );
   };
 
   return (
@@ -99,6 +110,8 @@ const App = () => {
               id={pos.id}
               index={index}
               position={{ x: pos.x, y: pos.y }}
+              isDone={pos.isDone}
+              changeIsDone={changeIsDone}
               title={pos.title}
               isDragged={dragIndex === index}
               onStop={handleStop}

@@ -7,6 +7,8 @@ const Box = ({
   id,
   index,
   position,
+  isDone,
+  changeIsDone,
   title,
   isDragged,
   onDrag,
@@ -16,7 +18,7 @@ const Box = ({
 }) => {
   const [coords, setCoords] = useState({ x: position.x, y: position.y });
   const [zIndex, setZIndex] = useState(1);
-  const [isDone, setIsDone] = useState(false);
+
   const [isStopped, setIsStopped] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
 
@@ -26,11 +28,11 @@ const Box = ({
     setIsStopped(false);
 
     if (data.x < -30) {
-      setIsDone(true);
+      changeIsDone(true, id);
     }
 
     if (data.x > 30) {
-      setIsDone(false);
+      changeIsDone(false, id);
     }
 
     if (onDrag) onDrag(e, data, id, index);
