@@ -6,7 +6,7 @@ import FAB from "./components/FAB.js";
 import AddNote from "./components/AddNote.js";
 
 const App = () => {
-  const data = ["Title1", "Title2", "Title3"];
+  const data = ["Get groceries", "Workout"];
 
   const [positions, setPositions] = useState([]);
   const [showDeleteIcon, setShowDeleteIcon] = useState(false);
