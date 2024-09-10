@@ -8,7 +8,7 @@ import AddNote from "./components/AddNote.js";
 const App = () => {
   const data = ["Get groceries", "Workout"];
 
-  const [positions, setPositions] = useState([]);
+  const [todoList, setTodoList] = useState([]);
   const [isDeleteActive, setIsDeleteActive] = useState(false);
 
   const [isAddNotePage, setIsAddNotePage] = useState(false);
@@ -27,7 +27,7 @@ const App = () => {
       const id = getRandomId();
       return { id, x: 0, y: 0, title: item, isDone: false };
     });
-    setPositions(mappedArr);
+    setTodoList(mappedArr);
   }, []);
 
   const checkIfOverlapping = (data, index) => {
@@ -55,7 +55,7 @@ const App = () => {
     if (isOverlapping) {
       setMoveUpIndex(index);
       setTimeout(() => {
-        setPositions((prevArr) => prevArr.filter((item) => item.id != id));
+        setTodoList((prevArr) => prevArr.filter((item) => item.id != id));
         setMoveUpIndex(-1);
       }, 500);
     }
@@ -73,7 +73,7 @@ const App = () => {
       if (inputText.length == 0) return;
 
       const id = getRandomId();
-      setPositions((prevArr) => [
+      setTodoList((prevArr) => [
         ...prevArr,
         { id, x: 0, y: 0, title: inputText, isDone: false },
       ]);
@@ -84,7 +84,7 @@ const App = () => {
   };
 
   const changeIsDone = (value, id) => {
-    setPositions((prevArr) =>
+    setTodoList((prevArr) =>
       prevArr.map((item) => {
         if (item.id === id) {
           return { id, x: 0, y: 0, title: item.title, isDone: value };
@@ -104,15 +104,15 @@ const App = () => {
         />
       ) : (
         <div className="container">
-          {positions.map((pos, index) => (
+          {todoList.map((todoItem, index) => (
             <Box
-              key={pos.id}
-              id={pos.id}
+              key={todoItem.id}
+              id={todoItem.id}
               index={index}
-              position={{ x: pos.x, y: pos.y }}
-              isDone={pos.isDone}
+              position={{ x: todoItem.x, y: todoItem.y }}
+              isDone={todoItem.isDone}
               changeIsDone={changeIsDone}
-              title={pos.title}
+              title={todoItem.title}
               isDragged={dragIndex === index}
               onStop={handleStop}
               onDrag={handleDrag}
