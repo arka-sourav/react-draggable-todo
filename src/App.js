@@ -9,7 +9,7 @@ const App = () => {
   const data = ["Get groceries", "Workout"];
 
   const [positions, setPositions] = useState([]);
-  const [showDeleteIcon, setShowDeleteIcon] = useState(false);
+  const [isDeleteActive, setIsDeleteActive] = useState(false);
 
   const [isAddNotePage, setIsAddNotePage] = useState(false);
   const [inputText, setInputText] = useState("");
@@ -49,8 +49,8 @@ const App = () => {
     setDragIndex(-1);
 
     const isOverlapping = checkIfOverlapping(data, index);
-    setShowDeleteIcon(isOverlapping);
-    setShowDeleteIcon(false);
+
+    setIsDeleteActive(false);
 
     if (isOverlapping) {
       setMoveUpIndex(index);
@@ -63,7 +63,7 @@ const App = () => {
 
   const handleDrag = (e, data, id, index) => {
     const isOverlapping = checkIfOverlapping(data, index);
-    setShowDeleteIcon(isOverlapping);
+    setIsDeleteActive(isOverlapping);
 
     setDragIndex(index);
   };
@@ -116,14 +116,14 @@ const App = () => {
               isDragged={dragIndex === index}
               onStop={handleStop}
               onDrag={handleDrag}
-              isDeleteOverlap={showDeleteIcon}
+              isDeleteOverlap={isDeleteActive}
               moveUpIndex={moveUpIndex}
             />
           ))}
         </div>
       )}
       <FAB
-        showDeleteIcon={showDeleteIcon}
+        isDeleteActive={isDeleteActive}
         isAddNotePage={isAddNotePage}
         inputText={inputText}
         handleFabClick={handleFabClick}

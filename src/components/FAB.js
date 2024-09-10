@@ -4,7 +4,7 @@ import deleteIcon from "../icons/deleteIcon.png";
 import add from "../icons/add.png";
 
 export default function FAB({
-  showDeleteIcon,
+  isDeleteActive,
   isAddNotePage,
   handleFabClick,
   inputText,
@@ -16,7 +16,7 @@ export default function FAB({
       style={{ bottom: isAddNotePage ? 0 : "20px" }}
     >
       <div
-        className={`fab ${showDeleteIcon ? "delete-fab" : ""} 
+        className={`fab ${isDeleteActive ? "delete-fab" : ""} 
         ${isAddNotePage ? "fab-expanded" : ""}`}
         style={{
           backgroundColor: isDragged ? "#ff0000d2 " : "blue",
